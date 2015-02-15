@@ -32,17 +32,27 @@
         (recur (+ acc 1) (rest seq)))))
 
 (defn avg [a-seq]
-  (loop [seq   a-seq
-         sum   0
-         count 0]
+  (loop [sum   0
+         count 0
+         seq   a-seq]
     (if (empty? seq)
       (/ sum count)
-      (recur (rest seq)
-             (+ sum (first seq))
-             (+ count 1)))))
+      (recur (+ sum (first seq))
+             (+ count 1)
+             (rest seq)))))
+
+(defn toggle [a-set elem]
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn parity [a-seq]
-  ":(")
+  (loop [pset #{}
+         seq  a-seq]
+    (if (empty? seq)
+      pset
+      (recur (toggle pset (first seq))
+             (rest seq)))))
 
 (defn fast-fibo [n]
   ":(")
