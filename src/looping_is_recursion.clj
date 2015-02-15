@@ -32,7 +32,14 @@
         (recur (+ acc 1) (rest seq)))))
 
 (defn avg [a-seq]
-  -1)
+  (loop [seq   a-seq
+         sum   0
+         count 0]
+    (if (empty? seq)
+      (/ sum count)
+      (recur (rest seq)
+             (+ sum (first seq))
+             (+ count 1)))))
 
 (defn parity [a-seq]
   ":(")
