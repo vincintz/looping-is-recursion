@@ -66,8 +66,9 @@
 (defn cut-at-repetition [a-seq]
   (loop [cur a-seq
          acc []]
-    (cond
-      (empty? cur)            acc
-      (contains? (set acc)
-                 (first cur)) acc
-      :else (recur (rest cur) (conj acc (first cur))))))
+    (if (empty? cur)
+      acc
+      (let [x (first cur)]
+        (if (contains? (set acc) x)
+          acc
+          (recur (rest cur) (conj acc x)))))))
