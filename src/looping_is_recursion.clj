@@ -64,4 +64,10 @@
       :else  (recur (dec cur) fn0 (+ fn1 fn0)))))
 
 (defn cut-at-repetition [a-seq]
-  [":("])
+  (loop [cur a-seq
+         acc []]
+    (cond
+      (empty? cur)            acc
+      (contains? (set acc)
+                 (first cur)) acc
+      :else (recur (rest cur) (conj acc (first cur))))))
