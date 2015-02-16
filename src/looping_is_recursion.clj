@@ -61,7 +61,9 @@
     (cond
       (zero? cur) 0
       (== cur 1)  (+ fn1 fn0)
-      :else  (recur (dec cur) fn0 (+ fn1 fn0)))))
+      :else  (recur (dec cur)
+                    fn0
+                    (+ fn1 fn0)))))
 
 (defn cut-at-repetition [a-seq]
   (loop [cur a-seq
